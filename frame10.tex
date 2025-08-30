@@ -1,0 +1,58 @@
+% Errors
+
+
+
+% \inferrule*[Right=SimplicialSingleton]
+%     {u \not \in V}
+%     {\simplicial{u}{G+u}}
+% \\
+% \inferrule*[Right=SimplicialNode]
+%     {\simplicial{u}{G} \\ u \neq v}
+%     {\simplicial{u}{G + v}}
+% \\
+% \inferrule*[Right=SimplicialEdge]
+%     {\simplicial{u}{G} \\ u \neq v' \\ u \neq v''}
+%     {\simplicial{u}{G + \{ v', v''\}}}
+% \\
+% \inferrule*[Right=SimplicialNeighbor]
+%     {\simplicial{u}{G}}
+%     {\simplicial{u}{\addvertex{G}{N(u)}{v}}}
+
+
+% \only<1>{
+% \[
+% \renewcommand{\arraystretch}{1}
+% \begin{array}{l}
+% B_1 := \text{Block (Normal 1) } [] \ [ \\
+% \quad r(0) \leftarrow i(0); \\
+% ] \ (\text{jump } B_2) \\
+% \\
+% B_2 := \text{Block (Normal 2) } [ \\
+% \quad r(2) \leftarrow \phi[(0, \ \text{Normal 1}); \ (3, \ \text{Normal 2})] \\
+% ] \ [ \\
+% \quad r(3) \leftarrow r(2) + 1 \\
+% ] \ (\text{if } r(3) < 20 \text{ then } B_2 \text{ else } B_3) \\
+% \\
+% B_3 := \text{Block (Normal 3) } [] \ [] \ (\text{ret } r(6)) \\
+% \end{array}
+% \]
+% }
+
+% \only<2>{
+% \[
+% \renewcommand{\arraystretch}{1}
+% \begin{array}{l}
+% B_1 := \text{Block (Normal 1) } [] \ [ \\
+% \quad r(\text{RBX}) \leftarrow i(0); \\
+% ] \ (\text{jump } B_2) \\
+% \\
+% B_2 := \text{Block (Normal 2) } [ \\
+% \quad r(\text{RBX}) \leftarrow \phi[(\text{RBX}, \ \text{Normal 1}); \ (\text{RBX}, \ \text{Normal 2})] \\
+% ] \ [ \\
+% \quad r(\text{RBX}) \leftarrow r(\text{RBX}) + 1 \\
+% ] \ (\text{if } r(\text{RBX}) < 20 \text{ then } B_2 \text{ else } B_3) \\
+% \\
+% B_3 := \text{Block (Normal 3) } [] \ [] \ (\text{ret } r(\text{RBX})) \\
+% \end{array}
+% \]
+% }

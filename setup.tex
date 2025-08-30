@@ -1,0 +1,157 @@
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{braket}
+\usepackage{mathpartir}
+
+\usepackage{glossaries}
+% \makeglossaries
+\newacronym{ra}{RA}{Register Assignment}
+\newacronym{jair}{JAIR}{Just Another Intermediate Representation}
+\newacronym{ssa}{SSA}{Static Single Assignment}
+\newacronym{peo}{PEO}{Perfect Elimination Order}
+\newacronym{cfg}{CFG}{Control Flow Graph}
+\newacronym{bnf}{BNF}{Backus-Naur Form}
+\newacronym{nasm}{NASM}{Netwise Assembler}
+\newacronym{jit}{JIT}{Just-In-Time}
+\newcommand{\nt}[1]{\langle\text{#1}\rangle}
+\newcommand{\BareCoqSymbol}{\includegraphics[height=0.9em]{coq.pdf}}
+\newcommand{\CoqSymbol}{\raisebox{-.2ex}{\BareCoqSymbol\,}}
+\newcommand{\Coqed}{{\hfill\CoqSymbol}}
+\newcommand{\chordalpeosymbol}{\mathrm{Chordal}_{\gls{peo}}}
+\newcommand{\chordalindsymbol}{\mathrm{Chordal}_{ind}}
+\newcommand{\chordalpeo}[1]{\vdash {#1} : \chordalpeosymbol}
+\newcommand{\chordalind}[1]{\vdash {#1} : \chordalindsymbol}
+\newcommand{\simplicialsymbol}{\mathrm{Simplicial}}
+\newcommand{\simplicial}[2]{{#2} \vdash {#1} : \simplicialsymbol}
+\newcommand{\addvertex}[3]{#1 \oplus_{#2} #3}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily,  % Same font as alltt
+    columns=fullflexible,  % Match spacing of alltt
+    keepspaces=true        % Preserve spaces like alltt
+}
+
+\definecolor{vara}{RGB}{255,102,102}  % Red for variable a
+\definecolor{varb}{RGB}{102,178,255}  % Blue for variable b
+\definecolor{varc}{RGB}{102,255,102}  % Green for variable c
+\definecolor{vard}{RGB}{255,178,102}  % Orange for variable d
+
+% Colorblind-proof colors
+\definecolor{StrongOrange}{RGB}{230,159,0}
+\newcommand{\cbnodeA}[0]{RoyalBlue}
+\newcommand{\cbnodeB}[0]{RedOrange}
+\newcommand{\cbnodeC}[0]{StrongOrange}
+
+\definecolor{myblue}{RGB}{0,0,180}
+\definecolor{mygreen}{RGB}{0,120,0}
+\definecolor{myred}{RGB}{180,0,0}
+\definecolor{mypurple}{RGB}{120,0,120}
+
+\lstdefinestyle{C}{
+    language=C,
+    mathescape=true,
+    tabsize=4,
+    keywordstyle=\color{myblue},              % Keywords in blue
+    commentstyle=\color{mygreen!50!black},    % Comments in green
+    stringstyle=\color{orange},             % Strings in orange
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    % frame=single,
+    breaklines=true
+}
+
+\lstdefinelanguage{Rocq}{
+    morekeywords=[1]{Definition, Inductive, CoInductive, Class, Instance, Fixpoint, CoFixpoint, Function, Proof, Qed, Module, Fail},
+    morekeywords=[2]{forall, exists, match, with, end, if, then, else, let, in, fix, fun, intros, unfold, destruct, lia},
+    morekeywords=[3]{Prop, Type, Set, True, False, nat, bool, option, list},
+    sensitive=true,
+    morecomment=[l]{(*},
+    morecomment=[s]{(*}{*)},
+    morestring=[b]",
+}
+
+\lstdefinestyle{Rocq}{
+    language=Rocq,
+    mathescape=true,
+    keywordstyle=[1]\color{myblue},
+    keywordstyle=[2]\color{mypurple},
+    keywordstyle=[3]\color{myred},
+    tabsize=2,
+    commentstyle=\color{green!50!black}\itshape,
+    stringstyle=\color{orange},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    % frame=single,
+    breaklines=true
+}
+
+% OCaml language with keyword groups
+\lstdefinelanguage{OCaml}{
+  sensitive=true,
+  morecomment=[s]{(*}{*)},
+  morestring=[b]",
+  morekeywords=[1]{
+    let, rec, in, and, val, type, module, struct, sig, class, object, method,
+    inherit, virtual, functor, include, open, external, exception
+  },
+  morekeywords=[2]{
+    if, then, else, match, with, try, when, for, to, downto, while, do, done,
+    begin, end, fun, function
+  },
+  morekeywords=[3]{true, false},
+  morekeywords=[4]{of, mutable, private, new, lazy, as, assert}
+}
+
+\lstdefinestyle{OCaml}{
+    language=OCaml,
+    mathescape=true,
+    keywordstyle=[1]\color{myblue}\bfseries,    % Declarations
+    keywordstyle=[2]\color{mypurple}\bfseries,  % Control flow
+    % keywordstyle=[3]\color{orange}\bfseries,    % Constants
+    keywordstyle=[4]\color{myred}\bfseries,      % Misc keywords
+    tabsize=2,
+    basicstyle=\ttfamily\small,
+    commentstyle=\color{green!50!black}\itshape,
+    stringstyle=\color{orange},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    % frame=single,
+    breaklines=true,
+}
+
+\lstdefinelanguage{NASM}{
+  morekeywords={
+    mov, add, sub, div, mul, imul, idiv, xor, and, or, inc, dec, jmp, cmp, je, jne, jl, jle, jg, jge, call, ret, push, pop, syscall
+  },
+  sensitive=true,
+  morecomment=[n]{;}{}, % NASM uses ';' for comments
+  morestring=[b]",      % Strings in double quotes
+  morestring=[b]',      % Strings in single quotes
+}
+
+\lstdefinestyle{NASM}{
+  language=NASM,
+  keywordstyle=\color{myblue}\bfseries,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  % frame=single,
+  basicstyle=\ttfamily,
+  breaklines=true
+}
+

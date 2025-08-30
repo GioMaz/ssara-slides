@@ -1,0 +1,36 @@
+% Errors
+
+
+\begin{onlyenv}<1>
+\begin{lstlisting}[style=Rocq]
+Definition is_simplicialb (g : InterfGraph.dict) (r : reg) : bool :=
+  regs_mem r (InterfGraph.keys g) &&
+  is_cliqueb g (InterfGraph.get g r ).
+\end{lstlisting}
+
+\begin{lstlisting}[style=Rocq]
+Definition find_next (g : InterfGraph.dict) : option reg :=
+  find (is_simplicialb g) (InterfGraph.keys g).
+\end{lstlisting}
+
+\begin{lstlisting}[style=Rocq]
+Definition eliminate_step
+  (g : InterfGraph.dict) : option (reg * InterfGraph.dict):=
+  match find_next g with
+  | Some next =>
+    Some (next, ig_remove_node g next)
+  | None => None
+  end.
+\end{lstlisting}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+\begin{lstlisting}[style=Rocq]
+Function eliminate
+  (g : InterfGraph.dict) {measure InterfGraph.size g} : list reg :=
+  match eliminate_step g with
+  | Some (next, g') => next :: (eliminate g')
+  | None => nil
+  end.
+\end{lstlisting}
+\end{onlyenv}

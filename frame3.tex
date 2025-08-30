@@ -1,0 +1,28 @@
+% Errors
+
+\begin{definition}[Single Static Assignment (SSA)]
+    A program is in SSA form iff:
+    \begin{itemize}
+        \item Every variable is defined \textit{exactly} once;
+        \item For every variable, its definition comes before its usages;
+    \end{itemize}
+\end{definition}
+
+\only<1>{
+\centering
+\begin{tikzpicture}[
+    node distance=10mm,
+    every node/.style={draw, align=left, inner sep=4pt},
+    >={Stealth}
+]
+\node (entry)   at (0, 0)       [draw, label=above:$B_0$]   {$r_0 \leftarrow 5$ \\ if $r_0 < 10$};
+\node (b1)      at (-1.5, -1.5) [draw, label=above:$B_1$]   {$r_1 \leftarrow r_0 + 1$};
+\node (b2)      at (1.5, -1.5)  [draw, label=above:$B_2$]   {$r_2 \leftarrow r_0 + 2$};
+\node (end)     at (0, -3)      [draw, label=above:$B_3$]   {$r_3 \leftarrow \phi(r_1, r_2)$ \\ ret $r_3$};
+
+\draw[->] (entry) -- (b1);
+\draw[->] (entry) -- (b2);
+\draw[->] (b1) -- (end);
+\draw[->] (b2) -- (end);
+\end{tikzpicture}
+}

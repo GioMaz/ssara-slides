@@ -1,0 +1,37 @@
+% Errors
+
+\begin{definition}[Register Assignment]
+    The problem of assigning a limited set of machine registers (i.e. $r_1, r_2, r_3$) to the unlimited set of variables of a program.
+\end{definition}
+
+\begin{figure}
+\begin{tikzpicture}[>=Stealth, thick]
+\node (A) {
+\begin{lstlisting}[style=C]
+int foo() {
+    int a = $\dots$;
+    int b = $\dots$;
+    int c = a + b;
+    int d = a + c;
+    int e = b + d;
+    return e;
+}
+\end{lstlisting}
+};
+
+\node (B) [right=6cm of A] {
+\begin{lstlisting}[style=C]
+int foo() {
+    int $r_1$ = $\dots$;
+    int $r_2$ = $\dots$;
+    int $r_3$ = $r_1$ + $r_2$
+    $r_3$ = $r_1$ + $r_3$;
+    $r_1$ = $r_2$ + $r_3$;
+    return $r_1$;
+}
+\end{lstlisting}
+};
+
+\draw[->, bend left=30, ultra thick, shorten >=30pt, shorten <=30pt] (A.east) to node[midway, above=6pt]{RA with registers $\{ r_1, r_2, r_3 \}$} (B.west);
+\end{tikzpicture}
+\end{figure}
