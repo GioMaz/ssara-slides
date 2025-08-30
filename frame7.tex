@@ -1,18 +1,22 @@
 % Errors
 
-
-\begin{onlyenv}<1>
+\begin{overlayarea}{\textwidth}{8cm}
+\begin{onlyenv}<1,2,3>
 \begin{lstlisting}[style=Rocq]
 Definition is_simplicialb (g : InterfGraph.dict) (r : reg) : bool :=
   regs_mem r (InterfGraph.keys g) &&
   is_cliqueb g (InterfGraph.get g r ).
 \end{lstlisting}
+\end{onlyenv}
 
+\begin{onlyenv}<2,3>
 \begin{lstlisting}[style=Rocq]
 Definition find_next (g : InterfGraph.dict) : option reg :=
   find (is_simplicialb g) (InterfGraph.keys g).
 \end{lstlisting}
+\end{onlyenv}
 
+\begin{onlyenv}<3>
 \begin{lstlisting}[style=Rocq]
 Definition eliminate_step
   (g : InterfGraph.dict) : option (reg * InterfGraph.dict):=
@@ -24,7 +28,7 @@ Definition eliminate_step
 \end{lstlisting}
 \end{onlyenv}
 
-\begin{onlyenv}<2>
+\begin{onlyenv}<4>
 \begin{lstlisting}[style=Rocq]
 Function eliminate
   (g : InterfGraph.dict) {measure InterfGraph.size g} : list reg :=
@@ -34,3 +38,4 @@ Function eliminate
   end.
 \end{lstlisting}
 \end{onlyenv}
+\end{overlayarea}
