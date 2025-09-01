@@ -1,26 +1,115 @@
 % Errors
 
-\begin{theorem}[Termination of \texttt{eliminate}]
-    Given $G = (V, E)$, after one elimination step, we obtain $G'=(V', E')$, such that $V' \subsetneq V$. \Coqed
-\end{theorem}
+\only<1>{
+\centering
 
-\pause
+$\boxed{\simplicial{u}{G}}$ In the context of graph $G$, node $u$ is simplicial.
 
-\begin{lemma}[Soundness of \texttt{is\_simplicialb}]
-    Given $G = (V, E)$, and node $u \in V$, if \texttt{is\_simplicialb} is \texttt{true}, then $\simplicial{u}{G}$. \Coqed
-\end{lemma}
+\vfill
 
-\pause
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
 
-\begin{lemma}[Completeness of \texttt{is\_simplicialb}]
-    Given $G = (V, E)$, and node $u \in V$, if $\simplicial{u}{G}$, then \texttt{is\_simplicialb} is \texttt{true}. \Coqed
-\end{lemma}
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
 
-\pause
+\only<2>{
+\[
+\inferrule*[Right=SimplicialSingleton]
+    {u \not \in V}
+    {\simplicial{u}{G+u}}
+\]
 
-\begin{theorem}[Partial Correctness of \texttt{eliminate}]
-    Given $G = (V, E)$ such that $G$ is chordal, if \texttt{eliminate\_step} returns node $u$, then $\simplicial{u}{G}$, otherwise $G = (\emptyset, \emptyset)$. \Coqed
-\end{theorem}
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, draw, minimum size=8mm] (a) at (0,0) {};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, double, draw=red, text=red, minimum size=8mm] at (3,1.5) {u};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
+
+\only<3>{
+\[
+\inferrule*[Right=SimplicialNode]
+    {\simplicial{u}{G}}
+    {\simplicial{u}{G + v}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] at (3,1.5) {v};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
+
+\only<4>{
+\[
+\inferrule*[Right=SimplicialEdge]
+    {\simplicial{u}{G} \\ u \neq v \\ u \neq w}
+    {\simplicial{u}{G + \{ v, w\}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (3,1.5) {v};
+    \node[circle, draw=red, text=red, minimum size=8mm] (w) at (5,1.5) {w};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+    \draw[draw=red] (v) -- (w);
+\end{tikzpicture}
+}
+
+\only<5>{
+\[
+\inferrule*[Right=SimplicialNeighbor]
+    {\simplicial{u}{G}}
+    {\simplicial{u}{\addvertex{G}{u}{v}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (1,-1.5) {v};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+    \draw[draw=red] (v) -- (a);
+    \draw[draw=red] (v) -- (b);
+    \draw[draw=red] (v) -- (c);
+\end{tikzpicture}
+}
 
 % \inferrule*[Right=SimplicialSingleton]
 %     {u \not \in V}

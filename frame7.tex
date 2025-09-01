@@ -1,41 +1,70 @@
 % Errors
 
-\begin{overlayarea}{\textwidth}{8cm}
-\begin{onlyenv}<1,2,3>
 \begin{lstlisting}[style=Rocq]
-Definition is_simplicialb (g : InterfGraph.dict) (r : reg) : bool :=
-  regs_mem r (InterfGraph.keys g) &&
-  is_cliqueb g (InterfGraph.get g r ).
-\end{lstlisting}
-\end{onlyenv}
+Inductive vm : Type :=
+  | Vm : (reg -> word) -> list word -> vm.
 
-\begin{onlyenv}<2,3>
-\begin{lstlisting}[style=Rocq]
-Definition find_next (g : InterfGraph.dict) : option reg :=
-  find (is_simplicialb g) (InterfGraph.keys g).
-\end{lstlisting}
-\end{onlyenv}
+Definition get_reg (m : vm) (r : reg) : word :=
+  (* ... *)
 
-\begin{onlyenv}<3>
-\begin{lstlisting}[style=Rocq]
-Definition eliminate_step
-  (g : InterfGraph.dict) : option (reg * InterfGraph.dict):=
-  match find_next g with
-  | Some next =>
-    Some (next, ig_remove_node g next)
-  | None => None
-  end.
-\end{lstlisting}
-\end{onlyenv}
+Definition set_reg (m : vm) (r : reg) (c : word) : vm :=
+  (* ... *)
 
-\begin{onlyenv}<4>
-\begin{lstlisting}[style=Rocq]
-Function eliminate
-  (g : InterfGraph.dict) {measure InterfGraph.size g} : list reg :=
-  match eliminate_step g with
-  | Some (next, g') => next :: (eliminate g')
-  | None => nil
-  end.
+Definition get_word (m : vm) (i : nat) : word :=
+  (* ... *)
+
+Definition set_word (m : vm) (i : nat) (c : word) : vm :=
+  (* ... *)
 \end{lstlisting}
-\end{onlyenv}
-\end{overlayarea}
+
+% \only<1>{
+% \begin{align*}
+% \nt{label} &::= \text{Normal} \ \mathbb N \mid \text{Point1} \ \mathbb N \mid \text{Point2} \ \mathbb N
+% \\
+% \nt{value} &::= i( \mathbb Z ) \mid r( \nt{register} ) \mid p( \mathbb N )
+% \\
+% \nt{expression} &::= \nt{value} \\
+% &\mid \text{load} \ \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{+} \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{-} \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{*} \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{/} \nt{value}
+% \\
+% \nt{instruction} &::= r( \nt{register} ) \leftarrow \nt{expression} \\
+% &\mid \text{store} \ r( \nt{register} ) \ r( \nt{register} )
+% \\
+% \nt{instructions} &::= \nt{instruction} ; \ \nt{instructions} \mid \nt{instruction}
+% \\
+% \nt{instructions-or-nil} &::= [ \nt{instructions} ] \mid []
+% \end{align*}
+% }
+
+% \only<2>{
+% \begin{align*}
+% \nt{phi-arguments} &::= ( \nt{register} , \ \nt{label} ) ; \ \nt{phi-arguments} \\
+% &\mid (\nt{register} , \ \nt{label})
+% \\
+% \nt{phi} &::= r( \nt{register} ) \leftarrow \phi \ \nt{phi-arguments-or-nil}
+% \\
+% \nt{phis} &::= \nt{phi} ; \ \nt{phis}
+% \\
+% \nt{phis-or-nil} &::= [ \nt{phis} ] \mid []
+% \end{align*}
+% }
+
+% \only<3>{
+% \begin{align*}
+% \nt{condition} &::= r(\nt{register}) = \nt{val} \\
+% &\mid r(\nt{register}) \neq \nt{val} \\
+% &\mid r(\nt{register}) < \nt{val} \\
+% &\mid r(\nt{register}) \leq \nt{val} \\
+% &\mid r(\nt{register}) > \nt{val} \\
+% &\mid r(\nt{register}) \geq \nt{val}
+% \\
+% \nt{jump-instruction} &::= \text{if} \ \nt{condition} \ \text{then} \ \nt{block} \ \text{else} \ \nt{block} \\
+% &\mid \text{jump} \ \nt{block} \\
+% &\mid \text{ret} \ r( \nt{register} )
+% \\
+% \nt{block} &::= \text{Block} \ ( \nt{label} ) \ \nt{phis-or-nil} \ \nt{instructions-or-nil} \ ( \nt{jump-instruction} )
+% \end{align*}
+% }

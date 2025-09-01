@@ -1,6 +1,8 @@
 % Errors
 
 \only<1>{
+\begin{minipage}{0.55\linewidth}
+\centering
 \[
 \renewcommand{\arraystretch}{1}
 \begin{array}{l}
@@ -11,31 +13,68 @@
 ] \ [ \\
 \quad r(9) \leftarrow r(6) + r(7); \\
 \quad r(10) \leftarrow r(9) + r(8); \\
-\quad r(11) \leftarrow r(10) * i(3) \\
+\quad r(11) \leftarrow r(10) \times i(3) \\
 ] \ ( \\
 \quad \text{if } r(10) \leq i(100) \text{ then } \dots \text{ else } \dots \\
 )
 \end{array}
 \]
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\linewidth}
+\centering
+\begin{tikzpicture}
+\node (b1) at (-1.5, 0) [minimum height=0.8cm, label=left:$B_1$] {$\dots$};
+\node (b2) at (1.5, 0) [minimum height=0.8cm, label=left:$B_2$] {$\dots$};
+\node (b3) at (0, -3) [draw, align=left, inner sep=4pt, label=above:$B_3$] {$r_6 \leftarrow \phi(r_0, r_3)$ \\ $r_7 \leftarrow \phi(r_1, r_4)$ \\ $r_8 \leftarrow \phi(r_2, r_5)$ \\ $r_9 \leftarrow r_6 + r_7$ \\ $r_{10} \leftarrow r_9 + r_8$ \\ $r_{11} \leftarrow r_{10} \times 3$ \\ if $r_{11} \leq 100$};
+\node (b4) at (-1.5, -6) [minimum height=0.8cm] {$\dots$};
+\node (b5) at (1.5, -6) [minimum height=0.8cm] {$\dots$};
+
+\draw[->] (b1) -- (b3);
+\draw[->] (b2) -- (b3);
+\draw[->] (b3) -- (b4);
+\draw[->] (b3) -- (b5);
+\end{tikzpicture}
+\end{minipage}
 }
 
 \only<2>{
+\centering
+\begin{minipage}{0.55\linewidth}
+\centering
 \[
 \renewcommand{\arraystretch}{1}
 \begin{array}{l}
 \text{Block (Normal 3) } [ \\
-\quad r(RDX) \leftarrow \phi[(RDX, \ \text{Normal 1}); \ (RDX, \ \text{Normal 2})]; \\
-\quad r(RBX) \leftarrow \phi[(RCX, \ \text{Normal 1}); \ (RCX, \ \text{Normal 2})]; \\
-\quad r(RCX) \leftarrow \phi[(RBX, \ \text{Normal 1}); \ (RBX, \ \text{Normal 2})] \\
+\quad r(\texttt{rdx}) \leftarrow \phi[(\texttt{rdx}, \ \text{Normal 1}); \ (\texttt{rdx}, \ \text{Normal 2})]; \\
+\quad r(\texttt{rbx}) \leftarrow \phi[(\texttt{rcx}, \ \text{Normal 1}); \ (\texttt{rcx}, \ \text{Normal 2})]; \\
+\quad r(\texttt{rcx}) \leftarrow \phi[(\texttt{rbx}, \ \text{Normal 1}); \ (\texttt{rbx}, \ \text{Normal 2})] \\
 ] \ [ \\
-\quad r(RBX) \leftarrow r(RDX) + r(RBX); \\
-\quad r(RBX) \leftarrow r(RBX) + r(RCX); \\
-\quad r(RBX) \leftarrow r(RBX) * i(3) \\
+\quad r(\texttt{rbx}) \leftarrow r(\texttt{rdx}) + r(\texttt{rbx}); \\
+\quad r(\texttt{rbx}) \leftarrow r(\texttt{rbx}) + r(\texttt{rcx}); \\
+\quad r(\texttt{rbx}) \leftarrow r(\texttt{rbx}) \times i(3) \\
 ] \ ( \\
-\quad \text{if } r(RBX) \leq i(100) \text{ then } \dots \text{ else } \dots \\
+\quad \text{if } r(\texttt{rbx}) \leq i(100) \text{ then } \dots \text{ else } \dots \\
 )
 \end{array}
 \]
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\linewidth}
+\centering
+\begin{tikzpicture}
+\node (b1) at (-1.5, 0) [minimum height=0.8cm, label=left:$B_1$] {$\dots$};
+\node (b2) at (1.5, 0) [minimum height=0.8cm, label=left:$B_2$] {$\dots$};
+\node (b3) at (0, -3) [draw, align=left, inner sep=4pt, label=above:$B_3$] {$\texttt{rdx} \leftarrow \phi(\texttt{rdx}, \texttt{rdx})$ \\ $\texttt{rbx} \leftarrow \phi(\texttt{rcx}, \texttt{rcx})$ \\ $\texttt{rcx} \leftarrow \phi(\texttt{rbx}, \texttt{rbx})$ \\ $\texttt{rbx} \leftarrow \texttt{rdx} + \texttt{rbx}$ \\ $\texttt{rbx} \leftarrow \texttt{rbx} + \texttt{rcx}$ \\ $\texttt{rbx} \leftarrow \texttt{rbx} \times 3$ \\ if $\texttt{rbx} \leq 100$};
+\node (b4) at (-1.5, -6) [minimum height=0.8cm] {$\dots$};
+\node (b5) at (1.5, -6) [minimum height=0.8cm] {$\dots$};
+
+\draw[->] (b1) -- (b3);
+\draw[->] (b2) -- (b3);
+\draw[->] (b3) -- (b4);
+\draw[->] (b3) -- (b5);
+\end{tikzpicture}
+\end{minipage}
 }
 
 % \only<1>{

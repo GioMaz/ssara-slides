@@ -1,26 +1,57 @@
 % Errors
 
-\begin{theorem}[Termination of \texttt{eliminate}]
-    Given $G = (V, E)$, after one elimination step, we obtain $G'=(V', E')$, such that $V' \subsetneq V$. \Coqed
-\end{theorem}
+\begin{onlyenv}<1>
+\begin{minipage}{0.58\linewidth}
+\begin{lstlisting}[style=Rocq, basicstyle=\footnotesize\ttfamily]
+CoFixpoint example_block_1 :=
+  Block (Normal 1) [] [
+    r(0) <- i(5);
+    r(1) <- r(0)
+  ] (jump example_block_2).
 
-\pause
+with example_block_2 :=
+  Block (Normal 2) [
+    r(2) <- phi [(0, Normal 1); (4, Normal 2)];
+    r(3) <- phi [(1, Normal 1); (5, Normal 2)]
+  ] [
+    r(4) <- r(2) - i(1);
+    r(5) <- r(3) * r(4)
+  ] (if r(4) <= i(1)
+    then example_block_3
+    else example_block_2).
 
-\begin{lemma}[Soundness of \texttt{is\_simplicialb}]
-    Given $G = (V, E)$, and node $u \in V$, if \texttt{is\_simplicialb} is \texttt{true}, then $\simplicial{u}{G}$. \Coqed
-\end{lemma}
+with example_block_3 :=
+  Block (Normal 3) [] [] (ret r(5)).
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\linewidth}
+\begin{lstlisting}[style=NASM, basicstyle=\footnotesize\ttfamily]
+L1:
+	mov	rcx,	5
+	mov	rbx,	rcx
+	jmp	L2
+L2:
+	sub	rcx,	1
+	imul	rbx,	rcx
+	cmp	rcx,	1
+	jle	L2.1
+	jmp	L2.2
+L2.1:
+	jmp	L3
+L3:
+	mov	rax,	60
+	mov	rdi,	rbx
+	syscall	
+L2.2:
+	jmp	L2
+\end{lstlisting}
+\end{minipage}
+\end{onlyenv}
 
-\pause
-
-\begin{lemma}[Completeness of \texttt{is\_simplicialb}]
-    Given $G = (V, E)$, and node $u \in V$, if $\simplicial{u}{G}$, then \texttt{is\_simplicialb} is \texttt{true}. \Coqed
-\end{lemma}
-
-\pause
-
-\begin{theorem}[Partial Correctness of \texttt{eliminate}]
-    Given $G = (V, E)$ such that $G$ is chordal, if \texttt{eliminate\_step} returns node $u$, then $\simplicial{u}{G}$, otherwise $G = (\emptyset, \emptyset)$. \Coqed
-\end{theorem}
+% \begin{alertblock}{NASM Generation}
+%     We extract the Rocq program to OCaml. We compose the register assignment pipeline into the \texttt{regassign} function. Finally, we compare the results of some programs.
+% \end{alertblock}
 
 % \inferrule*[Right=SimplicialSingleton]
 %     {u \not \in V}
