@@ -1,70 +1,167 @@
 % Errors
 
-\begin{lstlisting}[style=Rocq]
-Inductive vm : Type :=
-  | Vm : (reg -> word) -> list word -> vm.
+\only<1>{
+\centering
 
-Definition get_reg (m : vm) (r : reg) : word :=
-  (* ... *)
+$\boxed{\simplicial{u}{G}}$ In the context of graph $G$, node $u$ is simplicial.
 
-Definition set_reg (m : vm) (r : reg) (c : word) : vm :=
-  (* ... *)
+\vfill
 
-Definition get_word (m : vm) (i : nat) : word :=
-  (* ... *)
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
 
-Definition set_word (m : vm) (i : nat) (c : word) : vm :=
-  (* ... *)
-\end{lstlisting}
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
+
+\only<2>{
+\[
+\inferrule*[Right=SimplicialSingleton]
+    {\textcolor{red}{u} \not \in V}
+    {\simplicial{\textcolor{red}{u}}{G + \textcolor{red}{u}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, draw, minimum size=8mm] (a) at (0,0) {};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, double, draw=red, text=red, minimum size=8mm] at (3,1.5) {$u$};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
+
+\only<3>{
+\[
+\inferrule*[Right=SimplicialNode]
+    {\simplicial{u}{G}}
+    {\simplicial{u}{G + \textcolor{red}{v}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] at (3,1.5) {$v$};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
+
+\only<4>{
+\[
+\inferrule*[Right=SimplicialEdge]
+    {\simplicial{u}{G} \\ u \neq \textcolor{red}{v} \\ u \neq \textcolor{red}{w}}
+    {\simplicial{u}{G + \{ \textcolor{red}{v}, \textcolor{red}{w} \}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (3,1.5) {$v$};
+    \node[circle, draw=red, text=red, minimum size=8mm] (w) at (5,1.5) {$w$};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+    \draw[draw=red] (v) -- (w);
+\end{tikzpicture}
+}
+
+\only<5>{
+\[
+\inferrule*[Right=SimplicialNeighbor]
+    {\simplicial{u}{G}}
+    {\simplicial{u}{\addvertex{G}{u}{\textcolor{red}{v}}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (1,-1.5) {$v$};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+    \draw[draw=red] (v) -- (a);
+    \draw[draw=red] (v) -- (b);
+    \draw[draw=red] (v) -- (c);
+\end{tikzpicture}
+}
+
+% \inferrule*[Right=SimplicialSingleton]
+%     {u \not \in V}
+%     {\simplicial{u}{G+u}}
+% \\
+% \inferrule*[Right=SimplicialNode]
+%     {\simplicial{u}{G} \\ u \neq v}
+%     {\simplicial{u}{G + v}}
+% \\
+% \inferrule*[Right=SimplicialEdge]
+%     {\simplicial{u}{G} \\ u \neq v' \\ u \neq v''}
+%     {\simplicial{u}{G + \{ v', v''\}}}
+% \\
+% \inferrule*[Right=SimplicialNeighbor]
+%     {\simplicial{u}{G}}
+%     {\simplicial{u}{\addvertex{G}{N(u)}{v}}}
+
 
 % \only<1>{
-% \begin{align*}
-% \nt{label} &::= \text{Normal} \ \mathbb N \mid \text{Point1} \ \mathbb N \mid \text{Point2} \ \mathbb N
+% \[
+% \renewcommand{\arraystretch}{1}
+% \begin{array}{l}
+% B_1 := \text{Block (Normal 1) } [] \ [ \\
+% \quad r(0) \leftarrow i(0); \\
+% ] \ (\text{jump } B_2) \\
 % \\
-% \nt{value} &::= i( \mathbb Z ) \mid r( \nt{register} ) \mid p( \mathbb N )
+% B_2 := \text{Block (Normal 2) } [ \\
+% \quad r(2) \leftarrow \phi[(0, \ \text{Normal 1}); \ (3, \ \text{Normal 2})] \\
+% ] \ [ \\
+% \quad r(3) \leftarrow r(2) + 1 \\
+% ] \ (\text{if } r(3) < 20 \text{ then } B_2 \text{ else } B_3) \\
 % \\
-% \nt{expression} &::= \nt{value} \\
-% &\mid \text{load} \ \nt{value} \\
-% &\mid r( \nt{register} ) \makebox[1em]{+} \nt{value} \\
-% &\mid r( \nt{register} ) \makebox[1em]{-} \nt{value} \\
-% &\mid r( \nt{register} ) \makebox[1em]{*} \nt{value} \\
-% &\mid r( \nt{register} ) \makebox[1em]{/} \nt{value}
-% \\
-% \nt{instruction} &::= r( \nt{register} ) \leftarrow \nt{expression} \\
-% &\mid \text{store} \ r( \nt{register} ) \ r( \nt{register} )
-% \\
-% \nt{instructions} &::= \nt{instruction} ; \ \nt{instructions} \mid \nt{instruction}
-% \\
-% \nt{instructions-or-nil} &::= [ \nt{instructions} ] \mid []
-% \end{align*}
+% B_3 := \text{Block (Normal 3) } [] \ [] \ (\text{ret } r(6)) \\
+% \end{array}
+% \]
 % }
 
 % \only<2>{
-% \begin{align*}
-% \nt{phi-arguments} &::= ( \nt{register} , \ \nt{label} ) ; \ \nt{phi-arguments} \\
-% &\mid (\nt{register} , \ \nt{label})
+% \[
+% \renewcommand{\arraystretch}{1}
+% \begin{array}{l}
+% B_1 := \text{Block (Normal 1) } [] \ [ \\
+% \quad r(\text{RBX}) \leftarrow i(0); \\
+% ] \ (\text{jump } B_2) \\
 % \\
-% \nt{phi} &::= r( \nt{register} ) \leftarrow \phi \ \nt{phi-arguments-or-nil}
+% B_2 := \text{Block (Normal 2) } [ \\
+% \quad r(\text{RBX}) \leftarrow \phi[(\text{RBX}, \ \text{Normal 1}); \ (\text{RBX}, \ \text{Normal 2})] \\
+% ] \ [ \\
+% \quad r(\text{RBX}) \leftarrow r(\text{RBX}) + 1 \\
+% ] \ (\text{if } r(\text{RBX}) < 20 \text{ then } B_2 \text{ else } B_3) \\
 % \\
-% \nt{phis} &::= \nt{phi} ; \ \nt{phis}
-% \\
-% \nt{phis-or-nil} &::= [ \nt{phis} ] \mid []
-% \end{align*}
-% }
-
-% \only<3>{
-% \begin{align*}
-% \nt{condition} &::= r(\nt{register}) = \nt{val} \\
-% &\mid r(\nt{register}) \neq \nt{val} \\
-% &\mid r(\nt{register}) < \nt{val} \\
-% &\mid r(\nt{register}) \leq \nt{val} \\
-% &\mid r(\nt{register}) > \nt{val} \\
-% &\mid r(\nt{register}) \geq \nt{val}
-% \\
-% \nt{jump-instruction} &::= \text{if} \ \nt{condition} \ \text{then} \ \nt{block} \ \text{else} \ \nt{block} \\
-% &\mid \text{jump} \ \nt{block} \\
-% &\mid \text{ret} \ r( \nt{register} )
-% \\
-% \nt{block} &::= \text{Block} \ ( \nt{label} ) \ \nt{phis-or-nil} \ \nt{instructions-or-nil} \ ( \nt{jump-instruction} )
-% \end{align*}
+% B_3 := \text{Block (Normal 3) } [] \ [] \ (\text{ret } r(\text{RBX})) \\
+% \end{array}
+% \]
 % }

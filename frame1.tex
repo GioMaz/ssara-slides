@@ -1,37 +1,51 @@
 % Errors
 
-\begin{definition}[Register Assignment]
-    The problem of assigning a limited set of machine registers (i.e. $r_1, r_2, r_3$) to the unlimited set of variables of a program.
+\centering
+\begin{minipage}{0.58\linewidth}
+    \begin{tabular}{|c|p{3cm}|c|c|c|c|c|}
+    \hline
+    \textbf{Line} & \textbf{Code} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} \\
+    \hline
+    1 & \lstinline[style=C]|int a = $\dots$;| & & & & & \\
+    \hline
+    2 & \lstinline[style=C]|int b = $\dots$;| & $\bullet$ & & & & \\
+    \hline
+    3 & \lstinline[style=C]|int c = a + b;| & $\bullet$ & $\bullet$ & & & \\
+    \hline
+    4 & \lstinline[style=C]|int d = a + c;| & $\bullet$ & $\bullet$ & $\bullet$ & & \\
+    \hline
+    5 & \lstinline[style=C]|int e = b + d;| & & $\bullet$ & & $\bullet$ & \\
+    \hline
+    6 & \lstinline[style=C]|return e;| & & & & & $\bullet$ \\
+    \hline
+    \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\linewidth}
+    \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
+    \node<1> (a) at (0,0)      {a};
+    \node<1> (b) at (1,1.5)    {b};
+    \node<1> (c) at (2,0)      {c};
+    \node<1> (d) at (3,1.5)    {d};
+    \node<1> (e) at (4,0)    {e};
+    \node<2>[fill=\cbnodeA!60] (a) at (0,0)      {a};
+    \node<2>[fill=\cbnodeB!60] (b) at (1,1.5)    {b};
+    \node<2>[fill=\cbnodeC!60] (c) at (2,0)      {c};
+    \node<2>[fill=\cbnodeA!60] (d) at (3,1.5)    {d};
+    \node<2>[fill=\cbnodeA!60] (e) at (4,0)    {e};
+
+    \draw<1, 2>(a) -- (b);
+    \draw<1, 2>(a) -- (c);
+    \draw<1, 2>(b) -- (c);
+    \draw<1, 2>(b) -- (d);
+  \end{tikzpicture}
+\end{minipage}
+
+\hfill
+
+\begin{definition}[Interference Graph]
+    Graph $G = (V, E)$ such that \begin{itemize}
+        \item $V$ is the set of variables;
+        \item $E$ is the set of edges such that $\{ u, v \} \in E$, iff variables $u$ and $v$ interfere;
+    \end{itemize}
 \end{definition}
-
-\begin{figure}
-\begin{tikzpicture}[>=Stealth, thick]
-\node (A) {
-\begin{lstlisting}[style=C]
-int foo() {
-    int a = $\dots$;
-    int b = $\dots$;
-    int c = a + b;
-    int d = a + c;
-    int e = b + d;
-    return e;
-}
-\end{lstlisting}
-};
-
-\node (B) [right=6cm of A] {
-\begin{lstlisting}[style=C]
-int foo() {
-    int $r_1$ = $\dots$;
-    int $r_2$ = $\dots$;
-    int $r_3$ = $r_1$ + $r_2$
-    $r_3$ = $r_1$ + $r_3$;
-    $r_1$ = $r_2$ + $r_3$;
-    return $r_1$;
-}
-\end{lstlisting}
-};
-
-\draw[->, bend left=30, ultra thick, shorten >=30pt, shorten <=30pt] (A.east) to node[midway, above=6pt]{RA with registers $\{ r_1, r_2, r_3 \}$} (B.west);
-\end{tikzpicture}
-\end{figure}

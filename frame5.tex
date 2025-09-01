@@ -1,53 +1,70 @@
 % Errors
 
-\begin{minipage}{0.58\linewidth}
-    \centering
-    \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
-    % Black
-    \node<1> (a) at (0,0)           {a};
-    \node<1,2,3> (b) at (1,1.5)     {b};
-    \node<1,2> (c) at (2,0)         {c};
-    \node<1,2,3,4> (d) at (3,1.5)   {d};
-    \node<1,2,3,4,5> (e) at (4,0)   {e};
+\begin{lstlisting}[style=Rocq]
+Inductive vm : Type :=
+  | Vm : (reg -> word) -> list word -> vm.
 
-    % Grey
-    \node<2,3,4,5,6,7,8,9,10>[draw=lightgray, text=lightgray] (a) at (0,0) {a};
-    \node<4,5,6,7,8>[draw=lightgray, text=lightgray] (b) at (1,1.5)   {b};
-    \node<3,4,5,6,7,8,9>[draw=lightgray, text=lightgray] (c) at (2,0)   {c};
-    \node<5,6,7>[draw=lightgray, text=lightgray] (d) at (3,1.5)     {d};
-    \node<6>[draw=lightgray, text=lightgray] (e) at (4,0)          {e};
+Definition get_reg (m : vm) (r : reg) : word :=
+  (* ... *)
 
-    % Colored
-    \node<11>[fill=\cbnodeA!60] (a) at (0,0)            {a};
-    \node<9,10,11>[fill=\cbnodeB!60] (b) at (1,1.5)     {b};
-    \node<10,11>[fill=\cbnodeC!60] (c) at (2,0)         {c};
-    \node<8,9,10,11>[fill=\cbnodeA!60] (d) at (3,1.5)   {d};
-    \node<7,8,9,10,11>[fill=\cbnodeA!60] (e) at (4,0)   {e};
+Definition set_reg (m : vm) (r : reg) (c : word) : vm :=
+  (* ... *)
 
-    % Black
-    \draw<1,11>(a) -- (b);
-    \draw<1,11>(a) -- (c);
-    \draw<1,2,10,11>(b) -- (c);
-    \draw<1,2,3,9,10,11>(b) -- (d);
+Definition get_word (m : vm) (i : nat) : word :=
+  (* ... *)
 
-    % Grey
-    \draw<2,3,4,5,6,7,8,9,10>(a)[draw=lightgray] -- (b);
-    \draw<2,3,4,5,6,7,8,9,10>(a)[draw=lightgray] -- (c);
-    \draw<3,4,5,6,7,8,9>(b)[draw=lightgray] -- (c);
-    \draw<4,5,6,7,8>(b)[draw=lightgray] -- (d);
-  \end{tikzpicture}
-\end{minipage}
-\hfill
-\begin{minipage}{0.38\linewidth}
-    \only<1>{PEO:}
-    \only<2>{PEO: a}
-    \only<3>{PEO: a, c}
-    \only<4>{PEO: a, c, b}
-    \only<5>{PEO: a, c, b, d}
-    \only<6>{PEO: a, c, b, d, e}
-    \only<7>{PEO: a, c, b, d\textcolor{lightgray}{, e}}
-    \only<8>{PEO: a, c, b\textcolor{lightgray}{, d, e}}
-    \only<9>{PEO: a, c\textcolor{lightgray}{, b, d, e}}
-    \only<10>{PEO: a\textcolor{lightgray}{, c, b, d, e}}
-    \only<11>{PEO: \textcolor{lightgray}{a, c, b, d, e}}
-\end{minipage}
+Definition set_word (m : vm) (i : nat) (c : word) : vm :=
+  (* ... *)
+\end{lstlisting}
+
+% \only<1>{
+% \begin{align*}
+% \nt{label} &::= \text{Normal} \ \mathbb N \mid \text{Point1} \ \mathbb N \mid \text{Point2} \ \mathbb N
+% \\
+% \nt{value} &::= i( \mathbb Z ) \mid r( \nt{register} ) \mid p( \mathbb N )
+% \\
+% \nt{expression} &::= \nt{value} \\
+% &\mid \text{load} \ \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{+} \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{-} \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{*} \nt{value} \\
+% &\mid r( \nt{register} ) \makebox[1em]{/} \nt{value}
+% \\
+% \nt{instruction} &::= r( \nt{register} ) \leftarrow \nt{expression} \\
+% &\mid \text{store} \ r( \nt{register} ) \ r( \nt{register} )
+% \\
+% \nt{instructions} &::= \nt{instruction} ; \ \nt{instructions} \mid \nt{instruction}
+% \\
+% \nt{instructions-or-nil} &::= [ \nt{instructions} ] \mid []
+% \end{align*}
+% }
+
+% \only<2>{
+% \begin{align*}
+% \nt{phi-arguments} &::= ( \nt{register} , \ \nt{label} ) ; \ \nt{phi-arguments} \\
+% &\mid (\nt{register} , \ \nt{label})
+% \\
+% \nt{phi} &::= r( \nt{register} ) \leftarrow \phi \ \nt{phi-arguments-or-nil}
+% \\
+% \nt{phis} &::= \nt{phi} ; \ \nt{phis}
+% \\
+% \nt{phis-or-nil} &::= [ \nt{phis} ] \mid []
+% \end{align*}
+% }
+
+% \only<3>{
+% \begin{align*}
+% \nt{condition} &::= r(\nt{register}) = \nt{val} \\
+% &\mid r(\nt{register}) \neq \nt{val} \\
+% &\mid r(\nt{register}) < \nt{val} \\
+% &\mid r(\nt{register}) \leq \nt{val} \\
+% &\mid r(\nt{register}) > \nt{val} \\
+% &\mid r(\nt{register}) \geq \nt{val}
+% \\
+% \nt{jump-instruction} &::= \text{if} \ \nt{condition} \ \text{then} \ \nt{block} \ \text{else} \ \nt{block} \\
+% &\mid \text{jump} \ \nt{block} \\
+% &\mid \text{ret} \ r( \nt{register} )
+% \\
+% \nt{block} &::= \text{Block} \ ( \nt{label} ) \ \nt{phis-or-nil} \ \nt{instructions-or-nil} \ ( \nt{jump-instruction} )
+% \end{align*}
+% }

@@ -1,115 +1,57 @@
 % Errors
 
-\only<1>{
-\centering
+\begin{onlyenv}<1>
+\begin{minipage}{0.58\linewidth}
+\begin{lstlisting}[style=Rocq, basicstyle=\footnotesize\ttfamily]
+CoFixpoint example_block_1 :=
+  Block (Normal 1) [] [
+    r(0) <- i(5);
+    r(1) <- r(0)
+  ] (jump example_block_2).
 
-$\boxed{\simplicial{u}{G}}$ In the context of graph $G$, node $u$ is simplicial.
+with example_block_2 :=
+  Block (Normal 2) [
+    r(2) <- phi [(0, Normal 1); (4, Normal 2)];
+    r(3) <- phi [(1, Normal 1); (5, Normal 2)]
+  ] [
+    r(4) <- r(2) - i(1);
+    r(5) <- r(3) * r(4)
+  ] (if r(4) <= i(1)
+    then example_block_3
+    else example_block_2).
 
-\vfill
+with example_block_3 :=
+  Block (Normal 3) [] [] (ret r(5)).
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\linewidth}
+\begin{lstlisting}[style=NASM, basicstyle=\footnotesize\ttfamily]
+L1:
+	mov	rcx,	5
+	mov	rbx,	rcx
+	jmp	L2
+L2:
+	sub	rcx,	1
+	imul	rbx,	rcx
+	cmp	rcx,	1
+	jle	L2.1
+	jmp	L2.2
+L2.1:
+	jmp	L3
+L3:
+	mov	rax,	60
+	mov	rdi,	rbx
+	syscall	
+L2.2:
+	jmp	L2
+\end{lstlisting}
+\end{minipage}
+\end{onlyenv}
 
-\begin{tikzpicture}
-    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-\end{tikzpicture}
-}
-
-\only<2>{
-\[
-\inferrule*[Right=SimplicialSingleton]
-    {u \not \in V}
-    {\simplicial{u}{G+u}}
-\]
-
-\vfill
-
-\centering
-\begin{tikzpicture}
-    \node[circle, draw, minimum size=8mm] (a) at (0,0) {};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-    \node[circle, double, draw=red, text=red, minimum size=8mm] at (3,1.5) {u};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-\end{tikzpicture}
-}
-
-\only<3>{
-\[
-\inferrule*[Right=SimplicialNode]
-    {\simplicial{u}{G}}
-    {\simplicial{u}{G + v}}
-\]
-
-\vfill
-
-\centering
-\begin{tikzpicture}
-    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-    \node[circle, draw=red, text=red, minimum size=8mm] at (3,1.5) {v};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-\end{tikzpicture}
-}
-
-\only<4>{
-\[
-\inferrule*[Right=SimplicialEdge]
-    {\simplicial{u}{G} \\ u \neq v \\ u \neq w}
-    {\simplicial{u}{G + \{ v, w\}}}
-\]
-
-\vfill
-
-\centering
-\begin{tikzpicture}
-    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (3,1.5) {v};
-    \node[circle, draw=red, text=red, minimum size=8mm] (w) at (5,1.5) {w};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-    \draw[draw=red] (v) -- (w);
-\end{tikzpicture}
-}
-
-\only<5>{
-\[
-\inferrule*[Right=SimplicialNeighbor]
-    {\simplicial{u}{G}}
-    {\simplicial{u}{\addvertex{G}{u}{v}}}
-\]
-
-\vfill
-
-\centering
-\begin{tikzpicture}
-    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {u};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (1,-1.5) {v};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-    \draw[draw=red] (v) -- (a);
-    \draw[draw=red] (v) -- (b);
-    \draw[draw=red] (v) -- (c);
-\end{tikzpicture}
-}
+% \begin{alertblock}{NASM Generation}
+%     We extract the Rocq program to OCaml. We compose the register assignment pipeline into the \texttt{regassign} function. Finally, we compare the results of some programs.
+% \end{alertblock}
 
 % \inferrule*[Right=SimplicialSingleton]
 %     {u \not \in V}

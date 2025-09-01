@@ -1,28 +1,53 @@
 % Errors
 
-\begin{definition}[Single Static Assignment (SSA)]
-    A program is in SSA form iff:
-    \begin{itemize}
-        \item Every variable is defined \textit{exactly} once;
-        \item For every variable, its definition comes before its usages;
-    \end{itemize}
-\end{definition}
+\begin{minipage}{0.58\linewidth}
+    \centering
+    \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
+    % Black
+    \node<1> (a) at (0,0)           {a};
+    \node<1,2,3> (b) at (1,1.5)     {b};
+    \node<1,2> (c) at (2,0)         {c};
+    \node<1,2,3,4> (d) at (3,1.5)   {d};
+    \node<1,2,3,4,5> (e) at (4,0)   {e};
 
-\only<1>{
-\centering
-\begin{tikzpicture}[
-    node distance=10mm,
-    every node/.style={draw, align=left, inner sep=4pt},
-    >={Stealth}
-]
-\node (entry)   at (0, 0)       [draw, label=above:$B_0$]   {$r_0 \leftarrow 5$ \\ if $r_0 < 10$};
-\node (b1)      at (-1.5, -1.5) [draw, label=above:$B_1$]   {$r_1 \leftarrow r_0 + 1$};
-\node (b2)      at (1.5, -1.5)  [draw, label=above:$B_2$]   {$r_2 \leftarrow r_0 + 2$};
-\node (end)     at (0, -3)      [draw, label=above:$B_3$]   {$r_3 \leftarrow \phi(r_1, r_2)$ \\ ret $r_3$};
+    % Grey
+    \node<2,3,4,5,6,7,8,9,10>[draw=lightgray, text=lightgray] (a) at (0,0) {a};
+    \node<4,5,6,7,8>[draw=lightgray, text=lightgray] (b) at (1,1.5)   {b};
+    \node<3,4,5,6,7,8,9>[draw=lightgray, text=lightgray] (c) at (2,0)   {c};
+    \node<5,6,7>[draw=lightgray, text=lightgray] (d) at (3,1.5)     {d};
+    \node<6>[draw=lightgray, text=lightgray] (e) at (4,0)          {e};
 
-\draw[->] (entry) -- (b1);
-\draw[->] (entry) -- (b2);
-\draw[->] (b1) -- (end);
-\draw[->] (b2) -- (end);
-\end{tikzpicture}
-}
+    % Colored
+    \node<11>[fill=\cbnodeA!60] (a) at (0,0)            {a};
+    \node<9,10,11>[fill=\cbnodeB!60] (b) at (1,1.5)     {b};
+    \node<10,11>[fill=\cbnodeC!60] (c) at (2,0)         {c};
+    \node<8,9,10,11>[fill=\cbnodeA!60] (d) at (3,1.5)   {d};
+    \node<7,8,9,10,11>[fill=\cbnodeA!60] (e) at (4,0)   {e};
+
+    % Black
+    \draw<1,11>(a) -- (b);
+    \draw<1,11>(a) -- (c);
+    \draw<1,2,10,11>(b) -- (c);
+    \draw<1,2,3,9,10,11>(b) -- (d);
+
+    % Grey
+    \draw<2,3,4,5,6,7,8,9,10>(a)[draw=lightgray] -- (b);
+    \draw<2,3,4,5,6,7,8,9,10>(a)[draw=lightgray] -- (c);
+    \draw<3,4,5,6,7,8,9>(b)[draw=lightgray] -- (c);
+    \draw<4,5,6,7,8>(b)[draw=lightgray] -- (d);
+  \end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\linewidth}
+    \only<1>{PEO:}
+    \only<2>{PEO: a}
+    \only<3>{PEO: a, c}
+    \only<4>{PEO: a, c, b}
+    \only<5>{PEO: a, c, b, d}
+    \only<6>{PEO: a, c, b, d, e}
+    \only<7>{PEO: a, c, b, d\textcolor{lightgray}{, e}}
+    \only<8>{PEO: a, c, b\textcolor{lightgray}{, d, e}}
+    \only<9>{PEO: a, c\textcolor{lightgray}{, b, d, e}}
+    \only<10>{PEO: a\textcolor{lightgray}{, c, b, d, e}}
+    \only<11>{PEO: \textcolor{lightgray}{a, c, b, d, e}}
+\end{minipage}
