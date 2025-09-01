@@ -19,7 +19,7 @@
 \pause
 
 \begin{theorem}[Partial Correctness of \texttt{eliminate}]
-    Given $G = (V, E)$ such that $G$ is chordal, if \texttt{eliminate\_step} returns node $u$, then $\simplicial{u}{G}$, otherwise $G = (\emptyset, \emptyset)$. \Coqed
+    Given $G = (V, E)$ such that $G$ has a PEO, if \texttt{eliminate\_step} returns node $u$, then $\simplicial{u}{G}$, otherwise $G = (\emptyset, \emptyset)$. \Coqed
 \end{theorem}
 
 % \inferrule*[Right=SimplicialSingleton]
