@@ -8,6 +8,7 @@
 \usepackage{physics}
 \usepackage{braket}
 \usepackage{mathpartir}
+\usepackage{pdfpages}
 
 \usepackage{glossaries}
 % \makeglossaries
@@ -30,6 +31,12 @@
 \newcommand{\simplicialsymbol}{\mathrm{Simplicial}}
 \newcommand{\simplicial}[2]{{#2} \vdash {#1} : \simplicialsymbol}
 \newcommand{\addvertex}[3]{#1 \oplus_{#2} #3}
+\newcommand{\colorline}[2]{%
+\begingroup
+\setlength{\fboxsep}{0.5pt}%
+\colorbox{#1}{#2}%
+\endgroup
+}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, calc}

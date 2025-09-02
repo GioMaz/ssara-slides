@@ -7,13 +7,13 @@
 \renewcommand{\arraystretch}{1}
 \begin{array}{l}
 \text{Block (Normal 3) } [ \\
-\quad r(4) \leftarrow \phi[(0, \ \text{Normal 1}); \ (2, \ \text{Normal 2})]; \\
-\quad r(5) \leftarrow \phi[(1, \ \text{Normal 1}); \ (3, \ \text{Normal 2})] \\
+\quad \colorbox{yellow!20}{$r(4) \leftarrow \phi[(0, \ \text{Normal 1}); \ (2, \ \text{Normal 2})];$} \\
+\quad \colorbox{yellow!20}{$r(5) \leftarrow \phi[(1, \ \text{Normal 1}); \ (3, \ \text{Normal 2})]$} \\
 ] \ [ \\
-\quad r(6) \leftarrow r(4) \times r(5); \\
-\quad r(7) \leftarrow r(6) + i(1) \\
+\quad \colorbox{cyan!20}{$r(6) \leftarrow r(4) \times r(5);$} \\
+\quad \colorbox{cyan!20}{$r(7) \leftarrow r(6) + i(1)$} \\
 ] \ ( \\
-\quad \text{if } r(7) \leq i(100) \text{ then } \dots \text{ else } \dots \\
+\quad \colorbox{red!20}{$\text{if } r(7) \leq i(100) \text{ then } \dots \text{ else } \dots$} \\
 )
 \end{array}
 \]
@@ -24,7 +24,13 @@
 \begin{tikzpicture}
 \node (b1) at (-1.5, 0) [minimum height=0.8cm, label=left:$B_1$] {$\dots$};
 \node (b2) at (1.5, 0) [minimum height=0.8cm, label=left:$B_2$] {$\dots$};
-\node (b3) at (0, -2.5) [draw, align=left, inner sep=4pt, label=above:$B_3$] {$r_4 \leftarrow \phi(r_0, r_2)$ \\ $r_5 \leftarrow \phi(r_1, r_3)$ \\ $r_6 \leftarrow r_4 \times r_5$ \\ $r_7 \leftarrow r_6 + 1$ \\ if $r_7 \leq 100$};
+\node (b3) at (0, -2.5) [draw, align=left, inner sep=4pt, label=above:$B_3$] {
+    \colorbox{yellow!20}{$r_4 \leftarrow \phi(r_0, r_2)$} \\
+    \colorbox{yellow!20}{$r_5 \leftarrow \phi(r_1, r_3)$} \\
+    \colorbox{cyan!20}{$r_6 \leftarrow r_4 \times r_5$} \\
+    \colorbox{cyan!20}{$r_7 \leftarrow r_6 + 1$} \\
+    \colorbox{red!20}{if $r_7 \leq 100$}
+};
 \node (b4) at (-1.5, -5) [minimum height=0.8cm] {$\dots$};
 \node (b5) at (1.5, -5) [minimum height=0.8cm] {$\dots$};
 
@@ -44,13 +50,13 @@
 \renewcommand{\arraystretch}{1}
 \begin{array}{l}
 \text{Block (Normal 3) } [ \\
-\quad r(\texttt{rdx}) \leftarrow \phi[(\texttt{rdx}, \ \text{Normal 1}); \ (\texttt{rdx}, \ \text{Normal 2})]; \\
-\quad r(\texttt{rbx}) \leftarrow \phi[(\texttt{rbx}, \ \text{Normal 1}); \ (\texttt{rbx}, \ \text{Normal 2})]; \\
+\quad \colorbox{yellow!20}{$r(\texttt{rdx}) \leftarrow \phi[(\texttt{rdx}, \ \text{Normal 1}); \ (\texttt{rdx}, \ \text{Normal 2})];$} \\
+\quad \colorbox{yellow!20}{$r(\texttt{rbx}) \leftarrow \phi[(\texttt{rbx}, \ \text{Normal 1}); \ (\texttt{rbx}, \ \text{Normal 2})];$} \\
 ] \ [ \\
-\quad r(\texttt{rbx}) \leftarrow r(\texttt{rdx}) \times r(\texttt{rbx}); \\
-\quad r(\texttt{rbx}) \leftarrow r(\texttt{rbx}) + i(1); \\
+\quad \colorbox{cyan!20}{$r(\texttt{rbx}) \leftarrow r(\texttt{rdx}) \times r(\texttt{rbx});$} \\
+\quad \colorbox{cyan!20}{$r(\texttt{rbx}) \leftarrow r(\texttt{rbx}) + i(1);$} \\
 ] \ ( \\
-\quad \text{if } r(\texttt{rbx}) \leq i(100) \text{ then } \dots \text{ else } \dots \\
+\quad \colorbox{red!20}{$\text{if } r(\texttt{rbx}) \leq i(100) \text{ then } \dots \text{ else } \dots$} \\
 )
 \end{array}
 \]
@@ -61,7 +67,13 @@
 \begin{tikzpicture}
 \node (b1) at (-1.5, 0) [minimum height=0.8cm, label=left:$B_1$] {$\dots$};
 \node (b2) at (1.5, 0) [minimum height=0.8cm, label=left:$B_2$] {$\dots$};
-\node (b3) at (0, -2.5) [draw, align=left, inner sep=4pt, label=above:$B_3$] {$\texttt{rdx} \leftarrow \phi(\texttt{rdx}, \texttt{rdx})$ \\ $\texttt{rbx} \leftarrow \phi(\texttt{rbx}, \texttt{rbx})$ \\ $\texttt{rbx} \leftarrow \texttt{rdx} \times \texttt{rbx}$ \\ $\texttt{rbx} \leftarrow \texttt{rbx} + 1$ \\ if $\texttt{rbx} \leq 100$};
+\node (b3) at (0, -2.5) [draw, align=left, inner sep=4pt, label=above:$B_3$] {
+    \colorbox{yellow!20}{$\texttt{rdx} \leftarrow \phi(\texttt{rdx}, \texttt{rdx})$} \\
+    \colorbox{yellow!20}{$\texttt{rbx} \leftarrow \phi(\texttt{rbx}, \texttt{rbx})$} \\
+    \colorbox{cyan!20}{$\texttt{rbx} \leftarrow \texttt{rdx} \times \texttt{rbx}$} \\
+    \colorbox{cyan!20}{$\texttt{rbx} \leftarrow \texttt{rbx} + 1$} \\
+    \colorbox{red!20}{if $\texttt{rbx} \leq 100$}
+};
 \node (b4) at (-1.5, -5) [minimum height=0.8cm] {$\dots$};
 \node (b5) at (1.5, -5) [minimum height=0.8cm] {$\dots$};
 

@@ -91,6 +91,34 @@
 \input{frame9.tex}
 \end{frame}
 
+\usetikzlibrary{shadows}
+\usetikzlibrary{shadows.blur}
+
+\newcommand{\contr}[1]{build/contr#1.pdf}
+\newcommand{\trycontr}[1]{
+  \IfFileExists{\contr #1}{
+    \includegraphics[page=1,width=0.3\textwidth]{\contr #1}
+  }{
+    {\color{red} [Slide thumbnail will appear after next compile]}
+  }
+}
+\begin{frame}{Summary}
+\setlength{\fboxsep}{0pt}   % distance between image and border
+
+\trycontr 1
+\pause
+\trycontr 2
+\pause
+\trycontr 3
+\pause
+
+\trycontr 4
+\pause
+\trycontr 5
+
+\end{frame}
+
+
 % INDEX
 % Title
 % Overview
@@ -222,7 +250,9 @@
 %------------------------------------------------
 
 \begin{frame}
-    \Huge{\centerline{\textbf{The End}}}
+    \centering
+    {\Huge \textbf{Thank You}} \\[1.5em]
+    {\LARGE Questions?}
 \end{frame}
 
 % %----------------------------------------------------------------------------------------

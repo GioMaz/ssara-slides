@@ -18,14 +18,17 @@ Definition find_next (G : IFG) : option reg :=
 \begin{onlyenv}<3,4>
 \begin{lstlisting}[style=Rocq]
 Definition eliminate_step (G : IFG) : option (reg * IFG) :=
-  let* u = find_next G in (u, G - u)
+  let* u = find_next G in Some (u, G - u).
 \end{lstlisting}
 \end{onlyenv}
 
 \begin{onlyenv}<4>
 \begin{lstlisting}[style=Rocq]
 Function eliminate (G : IFG) {measure |G.V|} : list reg :=
-  let* (u, G') = eliminate_step G in u :: (eliminate G').
+  match eliminate_step G with
+  | Some (u, G') => in u :: (eliminate G')
+  | None => []
+  end.
 \end{lstlisting}
 \end{onlyenv}
 \end{overlayarea}
