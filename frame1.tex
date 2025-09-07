@@ -1,25 +1,51 @@
 % Errors
 
+\newcommand{\lstsp}{\texttt{ }}
 \centering
+\only<1,2>{
 \begin{minipage}{0.58\linewidth}
+    \lstset{style=C}
     \begin{tabular}{|c|p{3cm}|c|c|c|c|c|}
     \hline
     \textbf{Line} & \textbf{Code} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} \\
     \hline
-    1 & \lstinline[style=C]|int a = $\dots$;| & & & & & \\
+    1 & \lstinline|int a = $\dots$;| & & & & & \\
     \hline
-    2 & \lstinline[style=C]|int b = $\dots$;| & $\bullet$ & & & & \\
+    2 & \lstinline|int b = $\dots$;| & $\bullet$ & & & & \\
     \hline
-    3 & \lstinline[style=C]|int c = a + b;| & $\bullet$ & $\bullet$ & & & \\
+    3 & \lstinline|int c = a + b;| & $\bullet$ & $\bullet$ & & & \\
     \hline
-    4 & \lstinline[style=C]|int d = a + c;| & $\bullet$ & $\bullet$ & $\bullet$ & & \\
+    4 & \lstinline|int d = a + c;| & $\bullet$ & $\bullet$ & $\bullet$ & & \\
     \hline
-    5 & \lstinline[style=C]|int e = b + d;| & & $\bullet$ & & $\bullet$ & \\
+    5 & \lstinline|int e = b + d;| & & $\bullet$ & & $\bullet$ & \\
     \hline
-    6 & \lstinline[style=C]|return e;| & & & & & $\bullet$ \\
+    6 & \lstinline|return e;| & & & & & $\bullet$ \\
     \hline
     \end{tabular}
 \end{minipage}
+}
+\only<3>{
+\begin{minipage}{0.58\linewidth}
+    \lstset{style=C}
+    \begin{tabular}{|c|p{3cm}|c|c|c|c|c|}
+    \hline
+    \textbf{Line} & \textbf{Code} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} \\
+    \hline
+    1 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeA}{a} = }$\dots$ \texttt ; & & & & & \\
+    \hline
+    2 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeB}{b} = }$\dots$ \texttt ; & $\bullet$ & & & & \\
+    \hline
+    3 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeC}{c} = \textcolor{\cbnodeA}{a} + \textcolor{\cbnodeB}{b};} & $\bullet$ & $\bullet$ & & & \\
+    \hline
+    4 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeA}{d} = \textcolor{\cbnodeA}{a} + \textcolor{\cbnodeC}{c};} & $\bullet$ & $\bullet$ & $\bullet$ & & \\
+    \hline
+    5 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeA}{e} = \textcolor{\cbnodeB}{b} + \textcolor{\cbnodeA}{d};} & & $\bullet$ & & $\bullet$ & \\
+    \hline
+    6 & \lstinline|return|\lstsp\texttt{\textcolor{\cbnodeA}{e};} & & & & & $\bullet$ \\
+    \hline
+    \end{tabular}
+\end{minipage}
+}
 \hfill
 \begin{minipage}{0.38\linewidth}
     \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
@@ -28,20 +54,20 @@
     \node<1> (c) at (2,0)      {c};
     \node<1> (d) at (3,1.5)    {d};
     \node<1> (e) at (4,0)    {e};
-    \node<2>[fill=\cbnodeA!60] (a) at (0,0)      {a};
-    \node<2>[fill=\cbnodeB!60] (b) at (1,1.5)    {b};
-    \node<2>[fill=\cbnodeC!60] (c) at (2,0)      {c};
-    \node<2>[fill=\cbnodeA!60] (d) at (3,1.5)    {d};
-    \node<2>[fill=\cbnodeA!60] (e) at (4,0)    {e};
+    \node<2,3>[fill=\cbnodeA!60] (a) at (0,0)      {a};
+    \node<2,3>[fill=\cbnodeB!60] (b) at (1,1.5)    {b};
+    \node<2,3>[fill=\cbnodeC!60] (c) at (2,0)      {c};
+    \node<2,3>[fill=\cbnodeA!60] (d) at (3,1.5)    {d};
+    \node<2,3>[fill=\cbnodeA!60] (e) at (4,0)    {e};
 
-    \draw<1, 2>(a) -- (b);
-    \draw<1, 2>(a) -- (c);
-    \draw<1, 2>(b) -- (c);
-    \draw<1, 2>(b) -- (d);
+    \draw<1,2,3>(a) -- (b);
+    \draw<1,2,3>(a) -- (c);
+    \draw<1,2,3>(b) -- (c);
+    \draw<1,2,3>(b) -- (d);
   \end{tikzpicture}
 \end{minipage}
 
-\hfill
+\vfill
 
 \begin{definition}[Interference Graph]
     Graph $G = (V, E)$ such that \begin{itemize}
