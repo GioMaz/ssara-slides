@@ -9,9 +9,9 @@
     \hline
     \textbf{Line} & \textbf{Code} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} \\
     \hline
-    1 & \lstinline|int a = $\dots$;| & & & & & \\
+    1 & \lstinline|int a =|\lstsp$\dots$; & & & & & \\
     \hline
-    2 & \lstinline|int b = $\dots$;| & $\bullet$ & & & & \\
+    2 & \lstinline|int b =|\lstsp$\dots$; & $\bullet$ & & & & \\
     \hline
     3 & \lstinline|int c = a + b;| & $\bullet$ & $\bullet$ & & & \\
     \hline
@@ -31,9 +31,9 @@
     \hline
     \textbf{Line} & \textbf{Code} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} \\
     \hline
-    1 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeA}{a} = }$\dots$ \texttt ; & & & & & \\
+    1 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeA}{a} = }$\dots$\texttt ; & & & & & \\
     \hline
-    2 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeB}{b} = }$\dots$ \texttt ; & $\bullet$ & & & & \\
+    2 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeB}{b} = }$\dots$\texttt ; & $\bullet$ & & & & \\
     \hline
     3 & \lstinline|int|\lstsp\texttt{\textcolor{\cbnodeC}{c} = \textcolor{\cbnodeA}{a} + \textcolor{\cbnodeB}{b};} & $\bullet$ & $\bullet$ & & & \\
     \hline
@@ -70,8 +70,8 @@
 \vfill
 
 \begin{definition}[Interference Graph]
-    Graph $G = (V, E)$ such that \begin{itemize}
+    Graph $G = (V, E)$ such that: \begin{itemize}
         \item $V$ is the set of variables;
-        \item $E$ is the set of edges such that $\{ u, v \} \in E$, iff variables $u$ and $v$ interfere;
+        \item $E$ is the set of edges such that $\{ u, v \} \in E$, iff variables $u$ and $v$ interfere.
     \end{itemize}
 \end{definition}
