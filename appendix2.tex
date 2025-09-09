@@ -1,47 +1,40 @@
 % Errors
 
+\begin{minipage}{0.48\linewidth}
+\[
+\left.
+\begin{array}{r|l}
+\hspace{1cm}
+1 & \textcolor{red}{a \leftarrow \dots} \\
+2 & b \leftarrow \dots \\
+3 & c \leftarrow a + b \\
+4 & d \leftarrow b + c \\
 \only<1>{
-\[
-\inferrule*[Right=SimplicialNode]
-    {\simplicial{u}{G}}
-    {\simplicial{u}{G + \textcolor{red}{v}}}
-\]
-
-\vfill
-
-\centering
-\begin{tikzpicture}
-    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-    \node[circle, draw=red, text=red, minimum size=8mm] at (3,1.5) {$v$};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-\end{tikzpicture}
+5 & \textcolor{red}{a \leftarrow c + d} \\
 }
-
 \only<2>{
-\[
-\inferrule*[Right=SimplicialEdge]
-    {\simplicial{u}{G} \\ u \neq \textcolor{red}{v} \\ u \neq \textcolor{red}{w}}
-    {\simplicial{u}{G + \{ \textcolor{red}{v}, \textcolor{red}{w} \}}}
-\]
-
-\vfill
-
-\centering
-\begin{tikzpicture}
-    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
-    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
-    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
-    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (3,1.5) {$v$};
-    \node[circle, draw=red, text=red, minimum size=8mm] (w) at (5,1.5) {$w$};
-
-    \draw (a) -- (b);
-    \draw (a) -- (c);
-    \draw (b) -- (c);
-    \draw[draw=red] (v) -- (w);
-\end{tikzpicture}
+5 & \textcolor{red}{e \leftarrow c + d} \\
 }
+6 & \text{ret } d
+\end{array}
+\right\}
+\only<1>{\text{Non-SSA}}
+\only<2>{\text{SSA}}
+\]
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\linewidth}
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
+\node (a) at (0,0) {$a$};
+\node (b) at (2,0) {$b$};
+\node (c) at (2,-2) {$c$};
+\node (d) at (0,-2) {$d$};
+\node<2> (e) at (-2,-2) {$e$};
+\draw(a) -- (b);
+\draw(b) -- (c);
+\draw(c) -- (d);
+\draw<1>(d) -- (a);
+\draw<2>(d) -- (e);
+\end{tikzpicture}
+\end{minipage}

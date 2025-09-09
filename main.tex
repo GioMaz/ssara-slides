@@ -21,8 +21,8 @@
 \author{Giovanni Maria Zanchetta}
 \institute
 {
-    Advisor: Prof. Marco Patrignani \\
-    Co-Advisor: Matthis Kruse \\
+    Supervisor: Prof. Marco Patrignani \\
+    Co-Supervisor: Matthis Kruse \\
 }
 \date{September 2025}
 
@@ -85,37 +85,8 @@
 \input{frame7.tex}
 \end{frame}
 
-% \section{Generation of x86-64 Assembly}
-
-% \begin{frame}{Generation of x86-64 Assembly}
-% \input{frame9.tex}
-% \end{frame}
-
-\usetikzlibrary{shadows}
-\usetikzlibrary{shadows.blur}
-
-\newcommand{\contr}[1]{build/contr#1.pdf}
-\newcommand{\trycontr}[1]{
-  \IfFileExists{\contr #1}{
-    \includegraphics[page=1,width=0.3\textwidth]{\contr #1}
-  }{
-    {\color{red} [Slide thumbnail will appear after next compile]}
-  }
-}
 \begin{frame}{Summary}
-\setlength{\fboxsep}{0pt}
-
-\trycontr 1
-\pause
-\trycontr 2
-\pause
-\trycontr 3
-\pause
-
-\trycontr 4
-% \pause
-% \trycontr 5
-
+\input{frame8.tex}
 \end{frame}
 
 \begin{frame}
@@ -125,148 +96,27 @@
 \end{frame}
 
 \appendix
+\backupbegin
 
 \begin{frame}{Chromatic Number Theorem}
 \input{appendix1.tex}
 \end{frame}
 
-\begin{frame}{Additional Rules for the Simplicial Relation}
+\begin{frame}{Interference Graph of a Non-SSA Program}
 \input{appendix2.tex}
 \end{frame}
 
-\begin{frame}{Interference Graph of a Non-SSA Program}
+\begin{frame}{Additional Rules for the Simplicial Relation}
+\input{appendix3.tex}
 \end{frame}
 
-% INDEX
-% Title
-% Overview
-% SLIDE ABOUT RA
-% SLIDE ABOUT Graph Coloring RA
-% SLIDE ABOUT SSA
-% SLIDE ABOUT SSARA
-% SLIDE ABOUT JAIR Syntax
-% SLIDE ABOUT is_simplicialb
-% SLIDE ABOUT find_next
-% SLIDE ABOUT eliminate_step
+\begin{frame}{Soundness and Completeness of \texttt{is\_simplicialb}}
+\input{appendix4.tex}
+\end{frame}
 
-% EXPERIMENTAL INDEX
-% Title
-% Overview
-% SLIDE ABOUT RA
-% SLIDE ABOUT Graph Coloring RA
-% SLIDE ABOUT SSA
-% SLIDE ABOUT SSARA
-% SLIDE ABOUT JAIR Syntax
-% SLIDE ABOUT is_simplicialb
-% SLIDE ABOUT find_next
-% SLIDE ABOUT eliminate_step
-
-% %------------------------------------------------
-% \section{First Section}
-% %------------------------------------------------
-
-% \begin{frame}{Bullet Points}
-%     \begin{itemize}
-%         \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-%         \item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-%         \item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-%         \item Nam cursus est eget velit posuere pellentesque
-%         \item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-%     \end{itemize}
-% \end{frame}
-
-% %------------------------------------------------
-
-% \begin{frame}{Blocks of Highlighted Text}
-%     In this slide, some important text will be \alert{highlighted} because it's important. Please, don't abuse it.
-
-%     \begin{block}{Block}
-%         Sample text
-%     \end{block}
-
-%     \begin{alertblock}{Alertblock}
-%         Sample text in red box
-%     \end{alertblock}
-
-%     \begin{examples}
-%         Sample text in green box. The title of the block is ``Examples".
-%     \end{examples}
-% \end{frame}
-
-% %------------------------------------------------
-
-% \begin{frame}{Multiple Columns}
-%     \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-
-%         \column{.45\textwidth} % Left column and width
-%         \textbf{Heading}
-%         \begin{enumerate}
-%             \item Statement
-%             \item Explanation
-%             \item Example
-%         \end{enumerate}
-
-%         \column{.45\textwidth} % Right column and width
-%         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-
-%     \end{columns}
-% \end{frame}
-
-% %------------------------------------------------
-% \section{Second Section}
-% %------------------------------------------------
-
-% \begin{frame}{Table}
-%     \begin{table}
-%         \begin{tabular}{l l l}
-%             \toprule
-%             \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-%             \midrule
-%             Treatment 1         & 0.0003262           & 0.562               \\
-%             Treatment 2         & 0.0015681           & 0.910               \\
-%             Treatment 3         & 0.0009271           & 0.296               \\
-%             \bottomrule
-%         \end{tabular}
-%         \caption{Table caption}
-%     \end{table}
-% \end{frame}
-
-% %------------------------------------------------
-
-% \begin{frame}{Theorem}
-%     \begin{theorem}[Mass--energy equivalence]
-%         $E = mc^2$
-%     \end{theorem}
-% \end{frame}
-
-% %------------------------------------------------
-
-% \begin{frame}{Figure}
-%     Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
-%     %\begin{figure}
-%     %\includegraphics[width=0.8\linewidth]{test}
-%     %\end{figure}
-% \end{frame}
-
-% %------------------------------------------------
-
-% \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-%     \frametitle{Citation}
-%     An example of the \verb|\cite| command to cite within the presentation:\\~
-
-%     This statement requires citation \cite{p1}.
-% \end{frame}
-
-%------------------------------------------------
-
-% \begin{frame}{References}
-%     \footnotesize
-%     \bibliography{reference.bib}
-%     \bibliographystyle{apalike}
-% \end{frame}
-
-%------------------------------------------------
-
-% %----------------------------------------------------------------------------------------
+\begin{frame}{Generation of x86-64 Assembly}
+\input{appendix5.tex}
+\end{frame}
+\backupend
 
 \end{document}

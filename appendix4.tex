@@ -1,0 +1,11 @@
+% Errors
+
+\begin{lemma}[Soundness of \texttt{is\_simplicialb}]
+    Given $G = (V, E)$, and node $u \in V$, if \texttt{is\_simplicialb} is \texttt{true}, then $\simplicial{u}{G}$. \Coqed
+\end{lemma}
+
+\pause
+
+\begin{lemma}[Completeness of \texttt{is\_simplicialb}]
+    Given $G = (V, E)$, and node $u \in V$, if $\simplicial{u}{G}$, then \texttt{is\_simplicialb} is \texttt{true}. \Coqed
+\end{lemma}
