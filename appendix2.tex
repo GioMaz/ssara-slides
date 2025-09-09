@@ -1,0 +1,47 @@
+% Errors
+
+\only<1>{
+\[
+\inferrule*[Right=SimplicialNode]
+    {\simplicial{u}{G}}
+    {\simplicial{u}{G + \textcolor{red}{v}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] at (3,1.5) {$v$};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+\end{tikzpicture}
+}
+
+\only<2>{
+\[
+\inferrule*[Right=SimplicialEdge]
+    {\simplicial{u}{G} \\ u \neq \textcolor{red}{v} \\ u \neq \textcolor{red}{w}}
+    {\simplicial{u}{G + \{ \textcolor{red}{v}, \textcolor{red}{w} \}}}
+\]
+
+\vfill
+
+\centering
+\begin{tikzpicture}
+    \node[circle, double, draw, minimum size=8mm] (a) at (0,0) {$u$};
+    \node[circle, draw, minimum size=8mm] (b) at (1,1.5) {};
+    \node[circle, draw, minimum size=8mm] (c) at (2,0) {};
+    \node[circle, draw=red, text=red, minimum size=8mm] (v) at (3,1.5) {$v$};
+    \node[circle, draw=red, text=red, minimum size=8mm] (w) at (5,1.5) {$w$};
+
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+    \draw[draw=red] (v) -- (w);
+\end{tikzpicture}
+}

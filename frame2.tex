@@ -32,20 +32,20 @@
     >={Stealth}
 ]
 \node (entry) at (0, 0) [draw, label=left:$B_0$] {
-    $\textcolor<8->{\cbnodeA}{r_0} \leftarrow 5$ \\
-    $\textcolor<9->{\cbnodeB}{r_1} \leftarrow 10$ \\
-    if $\textcolor<8->{\cbnodeA}{r_0} < \textcolor<9->{\cbnodeB}{r_1}$
+    $\textcolor<8->{\cbnodeB}{r_0} \leftarrow 5$ \\
+    $\textcolor<9->{\cbnodeC}{r_1} \leftarrow 10$ \\
+    if $\textcolor<8->{\cbnodeB}{r_0} < \textcolor<9->{\cbnodeC}{r_1}$
 };
 \node (b1) at (-1.7, -1.4) [draw, label=left:$B_1$] {
-    $\textcolor<10->{\cbnodeC}{r_2} \leftarrow \textcolor<8->{\cbnodeA}{r_0} + 1$
+    $\textcolor<10->{\cbnodeA}{r_2} \leftarrow \textcolor<8->{\cbnodeB}{r_0} + 1$
 };
 \node (b2) at (1.7, -1.4) [draw, label=right:$B_2$] {
-    $\textcolor<11->{\cbnodeC}{r_3} \leftarrow \textcolor<8->{\cbnodeA}{r_0} + 2$
+    $\textcolor<11->{\cbnodeA}{r_3} \leftarrow \textcolor<8->{\cbnodeB}{r_0} + 2$
 };
 \node (end) at (0, -2.85) [draw, label=left:$B_3$] {
-    $\textcolor<12->{\cbnodeB}{r_4} \leftarrow \phi(\textcolor<10->{\cbnodeC}{r_2}, \textcolor<11->{\cbnodeC}{r_3})$ \\
-    $\textcolor<13->{\cbnodeA}{r_5} \leftarrow \textcolor<8->{\cbnodeA}{r_0} + \textcolor<9->{\cbnodeB}{r_1}$ \\
-    ret $\textcolor<12->{\cbnodeB}{r_4}$
+    $\textcolor<12->{\cbnodeA}{r_4} \leftarrow \phi(\textcolor<10->{\cbnodeA}{r_2}, \textcolor<11->{\cbnodeA}{r_3})$ \\
+    $\textcolor<13->{\cbnodeB}{r_5} \leftarrow \textcolor<8->{\cbnodeB}{r_0} + \textcolor<9->{\cbnodeC}{r_1}$ \\
+    ret $\textcolor<12->{\cbnodeA}{r_4}$
 };
 \draw[->] (entry) -- (b1);
 \draw[->] (entry) -- (b2);
@@ -72,12 +72,12 @@
 \node<3-11>[draw=lightgray, text=lightgray] (r4) at (-2,0) {$r_4$};
 \node<2-12>[draw=lightgray, text=lightgray] (r5) at (-2,-2) {$r_5$};
 
-\node<8->[fill=\cbnodeA!60] (r0) at (0,0) {$r_0$};
-\node<9->[fill=\cbnodeB!60] (r1) at (2,-2) {$r_1$};
-\node<11->[fill=\cbnodeC!60] (r2) at (0,-2) {$r_2$};
-\node<10->[fill=\cbnodeC!60] (r3) at (2,0) {$r_3$};
-\node<12->[fill=\cbnodeB!60] (r4) at (-2,0) {$r_4$};
-\node<13->[fill=\cbnodeA!60] (r5) at (-2,-2) {$r_5$};
+\node<8->[fill=\cbnodeB!60] (r0) at (0,0) {$r_0$};
+\node<9->[fill=\cbnodeC!60] (r1) at (2,-2) {$r_1$};
+\node<11->[fill=\cbnodeA!60] (r2) at (0,-2) {$r_2$};
+\node<10->[fill=\cbnodeA!60] (r3) at (2,0) {$r_3$};
+\node<12->[fill=\cbnodeA!60] (r4) at (-2,0) {$r_4$};
+\node<13->[fill=\cbnodeB!60] (r5) at (-2,-2) {$r_5$};
 
 \draw<-5,9-> (r0) -- (r1);
 \draw<-3,11-> (r0) -- (r2);
