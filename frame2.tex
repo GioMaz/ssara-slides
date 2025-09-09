@@ -43,7 +43,7 @@
     $\textcolor<11->{\cbnodeC}{r_3} \leftarrow \textcolor<8->{\cbnodeA}{r_0} + 2$
 };
 \node (end) at (0, -2.85) [draw, label=left:$B_3$] {
-    $\textcolor<12->{\cbnodeB}{r_4} \leftarrow \phi(\textcolor<10->{\cbnodeC}{r_2}, r_3)$ \\
+    $\textcolor<12->{\cbnodeB}{r_4} \leftarrow \phi(\textcolor<10->{\cbnodeC}{r_2}, \textcolor<11->{\cbnodeC}{r_3})$ \\
     $\textcolor<13->{\cbnodeA}{r_5} \leftarrow \textcolor<8->{\cbnodeA}{r_0} + \textcolor<9->{\cbnodeB}{r_1}$ \\
     ret $\textcolor<12->{\cbnodeB}{r_4}$
 };
@@ -85,6 +85,7 @@
 \draw<-2,12-> (r0) -- (r4);
 \draw<-3,11-> (r1) -- (r2);
 \draw<-4,10-> (r1) -- (r3);
+\draw<-2,12-> (r1) -- (r4);
 \draw<-1,13-> (r4) -- (r5);
 \draw<6-8>[draw=lightgray] (r0) -- (r1);
 \draw<4-10>[draw=lightgray] (r0) -- (r2);
@@ -92,6 +93,7 @@
 \draw<3-11>[draw=lightgray] (r0) -- (r4);
 \draw<4-10>[draw=lightgray] (r1) -- (r2);
 \draw<5-9>[draw=lightgray] (r1) -- (r3);
+\draw<3-11>[draw=lightgray] (r1) -- (r4);
 \draw<2-12>[draw=lightgray] (r4) -- (r5);
 \end{tikzpicture}
 \end{center}
