@@ -2,24 +2,18 @@
 
 \begin{minipage}{0.48\linewidth}
 \[
-\left.
 \begin{array}{r|l}
 \hspace{1cm}
-1 & \textcolor{red}{a \leftarrow \dots} \\
+1 & a \leftarrow \dots \\
 2 & b \leftarrow \dots \\
-3 & c \leftarrow a + b \\
-4 & d \leftarrow b + c \\
-\only<1>{
-5 & \textcolor{red}{a \leftarrow c + d} \\
-}
-\only<2>{
-5 & \textcolor{red}{e \leftarrow c + d} \\
-}
-6 & \text{ret } d
+\only<2->{3 & c \leftarrow a + b \\}
+\only<3->{4 & d \leftarrow b + c \\}
+\only<4,5>{5 & \textcolor{red}{a \leftarrow c + d} \\}
+\only<6>{5 & \textcolor{red}{e \leftarrow c + d} \\}
+\only<5,6>{6 & \text{ret } d}
 \end{array}
-\right\}
-\only<1>{\text{Non-SSA}}
-\only<2>{\text{SSA}}
+% \only<1->{\text{Non-SSA}}
+% \only<2>{\text{SSA}}
 \]
 \end{minipage}
 \hfill
@@ -28,13 +22,17 @@
 \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
 \node (a) at (0,0) {$a$};
 \node (b) at (2,0) {$b$};
-\node (c) at (2,-2) {$c$};
-\node (d) at (0,-2) {$d$};
-\node<2> (e) at (-2,-2) {$e$};
-\draw(a) -- (b);
-\draw(b) -- (c);
-\draw(c) -- (d);
-\draw<1>(d) -- (a);
-\draw<2>(d) -- (e);
+\node<2-> (c) at (2,-2) {$c$};
+\node<3-> (d) at (0,-2) {$d$};
+\node<6-> (e) at (-2,-2) {$e$};
+\draw<2->(a) -- (b);
+\draw<3->(b) -- (c);
+\draw<4->(c) -- (d);
+\draw<5>[draw=red](d) -- (a);
+\draw<6>[draw=red](d) -- (e);
 \end{tikzpicture}
+
+\only<5,6>{\vspace{0.5cm}}
+\only<5>{Does not admit a PEO!}
+\only<6>{PEO: $a, b, c, d, e$}
 \end{minipage}
