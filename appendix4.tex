@@ -1,11 +1,37 @@
 % Errors
 
-\begin{lemma}[Soundness of \texttt{is\_simplicialb}]
-    Given $G = (V, E)$, and node $u \in V$, if \texttt{is\_simplicialb} is \texttt{true}, then $\simplicial{u}{G}$. \Coqed
-\end{lemma}
+\centering
 
-\pause
+\begin{tikzpicture}[every node/.style={circle, draw, minimum size=8mm}]
+    \node<-1>[circle] (a) at (0,0) {$a$};
+    \node<-3>[circle] (b) at (-2,0) {$b$};
+    \node<-4>[circle] (c) at (-2,-2) {$c$};
+    \node<-2>[circle] (d) at (0,-2) {$d$};
+    \node<2-5>[circle, text=lightgray, draw=lightgray] (a) at (0,0) {$a$};
+    \node<4-7>[circle, text=lightgray, draw=lightgray] (b) at (-2,0) {$b$};
+    \node<5-8>[circle, text=lightgray, draw=lightgray] (c) at (-2,-2) {$c$};
+    \node<3-6>[circle, text=lightgray, draw=lightgray] (d) at (0,-2) {$d$};
+    \node<6->[circle, fill=\cbnodeA!60] (a) at (0,0) {$a$};
+    \node<8->[circle, fill=\cbnodeB!60] (b) at (-2,0) {$b$};
+    \node<9->[circle, fill=\cbnodeC!60] (c) at (-2,-2) {$c$};
+    \node<7->[circle, fill=\cbnodeA!60] (d) at (0,-2) {$d$};
 
-\begin{lemma}[Completeness of \texttt{is\_simplicialb}]
-    Given $G = (V, E)$, and node $u \in V$, if $\simplicial{u}{G}$, then \texttt{is\_simplicialb} is \texttt{true}. \Coqed
-\end{lemma}
+    \draw<-1,8-> (a) -- (b);
+    \draw<-3,9-> (b) -- (c);
+    \draw<-2,9-> (c) -- (d);
+    \draw<2-7>[draw=lightgray] (a) -- (b);
+    \draw<4-8>[draw=lightgray] (b) -- (c);
+    \draw<3-8>[draw=lightgray] (c) -- (d);
+\end{tikzpicture}
+
+\vfill
+
+\only<1>{PEO:}
+\only<2>{PEO: $a$}
+\only<3>{PEO: $a, d$}
+\only<4>{PEO: $a, d, b$}
+\only<5>{PEO: $a, d, b, c$}
+\only<6>{PEO: $\textcolor{lightgray}{a,} d, b, c$}
+\only<7>{PEO: $\textcolor{lightgray}{a, d,} b, c$}
+\only<8>{PEO: $\textcolor{lightgray}{a, d, b,} c$}
+\only<9>{PEO: $\textcolor{lightgray}{a, d, b, c}$}
