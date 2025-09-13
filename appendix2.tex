@@ -1,23 +1,43 @@
 % Errors
 
+\centering
 \begin{minipage}{0.48\linewidth}
 \centering
-\begin{tikzpicture}[every node/.style={align=left, anchor=west}]
-    \node (a) at (0,3.0) {$a \leftarrow \dots$};
-    \node (b) at (0,2.5) {$b \leftarrow \dots$};
-    \node (c) at (0,2.0) {$c \leftarrow a + b$};
-    \node (d) at (0,1.5) {$d \leftarrow b + c$};
-    \node (e) at (0,1.0) {$a \leftarrow c + d$};
-    \node (u1) at (0,0.5) {$\text{use } a$};
-    \node (u2) at (0,0.0) {$\text{use } d$};
+\begin{tabular}{|c|p{3cm}|c|c|c|c|}
+\hline
+\textbf{Line} & \textbf{Code} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} \\
+\hline
+1 & $a \leftarrow \dots$ & & & & \\
+\hline
+2 & $b \leftarrow \dots$ & $\bullet$ & & & \\
+\hline
+3 & $c \leftarrow a + b$ & $\bullet$ & $\bullet$ & & \\
+\hline
+4 & $d \leftarrow b + c$ & \only<2>{$\textcolor{red}{\bullet}$} & $\bullet$ & $\bullet$ & \\
+\hline
+5 & $a \leftarrow c + d$ & \only<2>{$\textcolor{red}{\bullet}$} & & $\bullet$ & $\bullet$ \\
+\hline
+6 & $\text{use } a$ & $\bullet$ & & & $\bullet$ \\
+\hline
+7 & $\text{use } d$ & & & & $\bullet$ \\
+\hline
+\end{tabular}
+% \begin{tikzpicture}[every node/.style={align=left, anchor=west}]
+%     \node (a) at (0,3.0) {$a \leftarrow \dots$};
+%     \node (b) at (0,2.5) {$b \leftarrow \dots$};
+%     \node (c) at (0,2.0) {$c \leftarrow a + b$};
+%     \node (d) at (0,1.5) {$d \leftarrow b + c$};
+%     \node (e) at (0,1.0) {$a \leftarrow c + d$};
+%     \node (u1) at (0,0.5) {$\text{use } a$};
+%     \node (u2) at (0,0.0) {$\text{use } d$};
 
-    \draw[thick] (2.5,2.0) -- (2.5,3.0) node[above] {$a$};
-    \draw[thick] (2.5,0.5) -- (2.5,1.0);
-    \draw<2>[thick, draw=red] (2.5,1.0) -- (2.5,2.0);
-    \draw[thick] (3.0,1.5) -- (3.0,2.5) node[above] {$b$};
-    \draw[thick] (3.5,1.0) -- (3.5,2.0) node[above] {$c$};
-    \draw[thick] (4.0,0.0) -- (4.0,1.5) node[above] {$d$};
-\end{tikzpicture}
+%     \draw[thick] (2.5,2.0) -- (2.5,3.0) node[above] {$a$};
+%     \draw[thick] (2.5,0.5) -- (2.5,1.0);
+%     \draw<2>[thick, draw=red] (2.5,1.0) -- (2.5,2.0);
+%     \draw[thick] (3.0,1.5) -- (3.0,2.5) node[above] {$b$};
+%     \draw[thick] (3.5,1.0) -- (3.5,2.0) node[above] {$c$};
+%     \draw[thick] (4.0,0.0) -- (4.0,1.5) node[above] {$d$};
+% \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.48\linewidth}
 \centering
