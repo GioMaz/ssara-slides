@@ -1,37 +1,78 @@
 % Errors
 
 \begin{minipage}{0.48\linewidth}
-\[
-\begin{array}{r|l}
-\hspace{1cm}
-1 & a \leftarrow \dots \\
-2 & b \leftarrow \dots
-\only<2->{\\ 3 & c \leftarrow a + b}
-\only<3->{\\ 4 & d \leftarrow b + c}
-\only<4,5,6>{\\ 5 & \textcolor{red}{a \leftarrow c + d}}
-\only<7>{\\ 5 & \textcolor{red}{e \leftarrow c + d}}
-\only<5,6,7>{\\ 6 & \text{use } a}
-\only<6,7>{\\ 7 & \text{use } d}
-\end{array}
-\]
+\centering
+\begin{tikzpicture}[every node/.style={align=left, anchor=west}]
+    \node (a) at (0,3.0) {$a \leftarrow \dots$};
+    \node (b) at (0,2.5) {$b \leftarrow \dots$};
+    \node (c) at (0,2.0) {$c \leftarrow a + b$};
+    \node (d) at (0,1.5) {$d \leftarrow b + c$};
+    \node (e) at (0,1.0) {$a \leftarrow c + d$};
+    \node (u1) at (0,0.5) {$\text{use } a$};
+    \node (u2) at (0,0.0) {$\text{use } d$};
+
+    \draw[thick] (2.5,2.0) -- (2.5,3.0) node[above] {$a$};
+    \draw[thick] (2.5,0.5) -- (2.5,1.0);
+    \draw<2>[thick, draw=red] (2.5,1.0) -- (2.5,2.0);
+    \draw[thick] (3.0,1.5) -- (3.0,2.5) node[above] {$b$};
+    \draw[thick] (3.5,1.0) -- (3.5,2.0) node[above] {$c$};
+    \draw[thick] (4.0,0.0) -- (4.0,1.5) node[above] {$d$};
+\end{tikzpicture}
 \end{minipage}
-\hfill
 \begin{minipage}{0.48\linewidth}
 \centering
 \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
 \node (a) at (0,0) {$a$};
 \node (b) at (2,0) {$b$};
-\node<2-> (c) at (2,-2) {$c$};
-\node<3-> (d) at (0,-2) {$d$};
-\node<7-> (e) at (-2,-2) {$e$};
-\draw<2->(a) -- (b);
-\draw<3->(b) -- (c);
-\draw<4->(c) -- (d);
-\draw<6>[draw=red](d) -- (a);
-\draw<7>[draw=red](d) -- (e);
+\node (c) at (2,-2) {$c$};
+\node (d) at (0,-2) {$d$};
+\draw(a) -- (b);
+\draw<2>[draw=red] (a) -- (c);
+\draw(b) -- (c);
+\draw(c) -- (d);
+\draw(d) -- (a);
 \end{tikzpicture}
 
-\only<6,7>{\vspace{0.5cm}}
-\only<6>{Does not admit a PEO!}
-\only<7>{PEO: $a, b, c, d, e$}
+\vspace{0.5em}
+
+\only<1>{Does not admit a PEO!}
+\only<2>{PEO: $d, c, b, a$}
 \end{minipage}
+
+% \begin{minipage}{0.48\linewidth}
+% \[
+% \begin{array}{r|l}
+% \hspace{1cm}
+% 1 & a \leftarrow \dots \\
+% 2 & b \leftarrow \dots
+% \only<2->{\\ 3 & c \leftarrow a + b}
+% \only<3->{\\ 4 & d \leftarrow b + c}
+% \only<4,5,6>{\\ 5 & \textcolor{red}{a \leftarrow c + d}}
+% \only<7>{\\ 5 & \textcolor{red}{e \leftarrow c + d}}
+% \only<5,6,7>{\\ 6 & \text{use } a}
+% \only<6,7>{\\ 7 & \text{use } d}
+% \end{array}
+% \]
+% \end{minipage}
+% \hfill
+% \begin{minipage}{0.48\linewidth}
+% \centering
+% \begin{tikzpicture}[scale=1, every node/.style={circle, draw, minimum size=8mm}]
+% \node (a) at (0,0) {$a$};
+% \node (b) at (2,0) {$b$};
+% \node<2-> (c) at (2,-2) {$c$};
+% \node<3-> (d) at (0,-2) {$d$};
+% \node<7-> (e) at (-2,-2) {$e$};
+% \draw<2->(a) -- (b);
+% \draw<3->(b) -- (c);
+% \draw<4->(c) -- (d);
+% \draw<6->(d) -- (a);
+% \draw<7>[draw=red](a) -- (c);
+% \draw<7>[draw=red](a) -- (e);
+% \draw<7>[draw=red](d) -- (e);
+% \end{tikzpicture}
+
+% \only<6,7>{\vspace{0.5cm}}
+% \only<6>{Does not admit a PEO!}
+% \only<7>{PEO: $e, b, d, c, a$}
+% \end{minipage}
